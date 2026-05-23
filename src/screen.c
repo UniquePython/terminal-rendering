@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 
 Screen *ScreenCreate(size_t width, size_t height)
 {
@@ -62,7 +63,7 @@ void ScreenRender(const Screen *screen)
     if (!screen)
         return;
 
-    printf("\033[H");
+    printf("\033[2J\033[H");
 
     for (size_t row = 0; row < screen->height; row++)
     {
@@ -82,4 +83,37 @@ void ScreenFill(Screen *screen, size_t x, size_t y, size_t width, size_t height,
     for (size_t row = y; row < y + height; row++)
         for (size_t col = x; col < x + width; col++)
             ScreenSetPixel(screen, col, row, color);
+}
+
+void ScreenDrawLine(Screen *screen, size_t x0, size_t y0, size_t x1, size_t y1, Pixel color)
+{
+    int dx = abs((int)x1 - (int)x0);
+    int sx = x0 < x1 ? 1 : -1;
+    int dy = -abs((int)y1 - (int)y0);
+    int sy = y0 < y1 ? 1 : -1;
+    int error = dx + dy;
+
+    while (1)
+    {
+        ScreenSetPixel(screen, x0, y0, color);
+
+        int e2 = 2 * error;
+
+        if (e2 >= dy)
+        {
+            if (x0 == x1)
+                break;
+
+            error = error + dy;
+            x0 = x0 + sx;
+        }
+        if (e2 <= dx)
+        {
+            if (y0 == y1)
+                break;
+
+            error = error + dx;
+            y0 = y0 + sy;
+        }
+    }
 }

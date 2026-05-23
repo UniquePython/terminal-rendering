@@ -26,5 +26,6 @@ void ScreenSetPixel(Screen *screen, size_t x, size_t y, Pixel color);
 void ScreenRender(const Screen *screen);
 
 void ScreenFill(Screen *screen, size_t x, size_t y, size_t width, size_t height, Pixel color);
+void ScreenDrawLine(Screen *screen, size_t x0, size_t y0, size_t x1, size_t y1, Pixel color);
 
 #endif
