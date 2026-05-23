@@ -13,19 +13,20 @@ typedef struct
 
 typedef struct
 {
-    size_t width, height;
+    int width, height;
     Pixel *pixels;
 } Screen;
 
-Screen *ScreenCreate(size_t width, size_t height);
+Screen *ScreenCreate(int width, int height);
 void ScreenDestroy(Screen **screen);
 
 void ScreenClear(Screen *screen, Pixel color);
-void ScreenSetPixel(Screen *screen, size_t x, size_t y, Pixel color);
+void ScreenSetPixel(Screen *screen, int x, int y, Pixel color);
 
 void ScreenRender(const Screen *screen);
 
-void ScreenFill(Screen *screen, size_t x, size_t y, size_t width, size_t height, Pixel color);
-void ScreenDrawLine(Screen *screen, size_t x0, size_t y0, size_t x1, size_t y1, Pixel color);
+void ScreenFill(Screen *screen, int x, int y, int width, int height, Pixel color);
+void ScreenDrawLine(Screen *screen, int x0, int y0, int x1, int y1, Pixel color);
+void ScreenDrawCircleOutline(Screen *screen, int cx, int cy, int radius, Pixel color);
 
 #endif

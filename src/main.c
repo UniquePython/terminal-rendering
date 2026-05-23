@@ -10,6 +10,7 @@ int main(void)
     ScreenSetPixel(screen, 45, 30, (Pixel){255, 0, 0});
     ScreenFill(screen, 0, 0, 10, 10, (Pixel){0, 255, 0});
     ScreenDrawLine(screen, 40, 0, 45, 10, (Pixel){0, 0, 255});
+    ScreenDrawCircleOutline(screen, 60, 30, 5, (Pixel){0, 0, 0});
 
     ScreenRender(screen);
 
