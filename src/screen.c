@@ -161,3 +161,39 @@ void ScreenDrawCircleOutline(Screen *screen, int cx, int cy, int radius, Pixel c
         }
     }
 }
+
+void ScreenDrawFilledCircle(Screen *screen, int cx, int cy, int radius, Pixel color)
+{
+    if (radius < 0)
+        return;
+
+    int t1 = radius / 16;
+    int x = radius;
+    int y = 0;
+
+    while (x >= y)
+    {
+        for (int i = cx - x; i <= cx + x; i++)
+        {
+            ScreenSetPixel(screen, i, cy + y, color);
+            ScreenSetPixel(screen, i, cy - y, color);
+        }
+
+        for (int i = cx - y; i <= cx + y; i++)
+        {
+            ScreenSetPixel(screen, i, cy + x, color);
+            ScreenSetPixel(screen, i, cy - x, color);
+        }
+
+        y = y + 1;
+        t1 = t1 + y;
+
+        int t2 = t1 - x;
+
+        if (t2 >= 0)
+        {
+            t1 = t2;
+            x = x - 1;
+        }
+    }
+}

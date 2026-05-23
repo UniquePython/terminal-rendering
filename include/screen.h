@@ -28,5 +28,6 @@ void ScreenRender(const Screen *screen);
 void ScreenFill(Screen *screen, int x, int y, int width, int height, Pixel color);
 void ScreenDrawLine(Screen *screen, int x0, int y0, int x1, int y1, Pixel color);
 void ScreenDrawCircleOutline(Screen *screen, int cx, int cy, int radius, Pixel color);
+void ScreenDrawFilledCircle(Screen *screen, int cx, int cy, int radius, Pixel color);
 
 #endif
