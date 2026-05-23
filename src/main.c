@@ -8,6 +8,7 @@ int main(void)
 
     ScreenClear(screen, (Pixel){255, 255, 255});
     ScreenSetPixel(screen, 45, 30, (Pixel){255, 0, 0});
+    ScreenFill(screen, 0, 0, 10, 10, (Pixel){0, 255, 0});
 
     ScreenRender(screen);
 

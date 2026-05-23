@@ -25,4 +25,6 @@ void ScreenSetPixel(Screen *screen, size_t x, size_t y, Pixel color);
 
 void ScreenRender(const Screen *screen);
 
+void ScreenFill(Screen *screen, size_t x, size_t y, size_t width, size_t height, Pixel color);
+
 #endif

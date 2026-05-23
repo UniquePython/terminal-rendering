@@ -76,3 +76,10 @@ void ScreenRender(const Screen *screen)
 
     fflush(stdout);
 }
+
+void ScreenFill(Screen *screen, size_t x, size_t y, size_t width, size_t height, Pixel color)
+{
+    for (size_t row = y; row < y + height; row++)
+        for (size_t col = x; col < x + width; col++)
+            ScreenSetPixel(screen, col, row, color);
+}
