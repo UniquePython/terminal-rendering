@@ -1,21 +1,62 @@
 #include "screen.h"
 
+#include <unistd.h>
+#include <stdlib.h>
+
 int main(void)
 {
-    Screen *screen = ScreenCreate(90, 60);
+    Screen *screen = ScreenCreate(80, 40);
     if (!screen)
-        return 1;
+        return EXIT_FAILURE;
 
-    ScreenClear(screen, (Pixel){255, 255, 255});
-    ScreenSetPixel(screen, 45, 30, (Pixel){255, 0, 0});
-    ScreenFill(screen, 0, 0, 10, 10, (Pixel){0, 255, 0});
-    ScreenDrawLine(screen, 40, 0, 45, 10, (Pixel){0, 0, 255});
-    ScreenDrawCircleOutline(screen, 60, 30, 5, (Pixel){0, 0, 0});
-    ScreenDrawFilledCircle(screen, 50, 10, 5, (Pixel){0, 0, 0});
+    Pixel background = {0, 0, 0};
+    Pixel ball = {255, 0, 0};
 
-    ScreenRender(screen);
+    int radius = 4;
+
+    int x = 20;
+    int y = 10;
+
+    int vx = 1;
+    int vy = 1;
+
+    while (1)
+    {
+        ScreenClear(screen, background);
+
+        ScreenDrawFilledCircle(screen, x, y, radius, ball);
+
+        ScreenRender(screen);
+
+        x = x + vx;
+        y = y + vy;
+
+        if (x - radius < 0)
+        {
+            x = radius;
+            vx = -vx;
+        }
+        else if (x + radius >= screen->width)
+        {
+            x = screen->width - radius - 1;
+            vx = -vx;
+        }
+
+        if (y - radius < 0)
+        {
+            y = radius;
+            vy = -vy;
+        }
+        else if (y + radius >= screen->height)
+        {
+            y = screen->height - radius - 1;
+            vy = -vy;
+        }
+
+        usleep(16666);
+    }
 
     ScreenDestroy(&screen);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
